@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>929,1758</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>929,2012</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="43">
@@ -91,41 +91,22 @@
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>BenefitsLibrary</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="939,1693" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="939,1947" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="st_GetLicensesNamedUserEndpoint">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">odata/LicensesNamedUser/UiPath.Server.Configuration.OData.GetLicensesNamedUser(robotType='{robotType}')</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="st_AttendedString">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Attended</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="odata/LicensesNamedUser/UiPath.Server.Configuration.OData.GetLicensesNamedUser(robotType='{robotType}')" Name="st_GetLicensesNamedUserEndpoint" />
+      <Variable x:TypeArguments="x:String" Default="Attended" Name="st_AttendedString" />
       <Variable x:TypeArguments="x:String" Default="StudioX" Name="st_StudioXString" />
       <Variable x:TypeArguments="x:String" Default="Automation Developer" Name="st_AutomationDeveloperString" />
       <Variable x:TypeArguments="x:Int32" Name="int_GetAutoDevLicStatCode" />
       <Variable x:TypeArguments="x:String" Name="st_GetLicensesNamedUserResposne" />
       <Variable x:TypeArguments="njl:JObject" Name="js_UsersObject" />
-      <Variable x:TypeArguments="njl:JArray" Name="jsar_StudioXUsersArray">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="njl:JArray" ExpressionText="new JArray()" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="st_StudioString">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Studio</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="njl:JArray" Default="[new JArray()]" Name="jsar_StudioXUsersArray" />
+      <Variable x:TypeArguments="x:String" Default="Studio" Name="st_StudioString" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_UserLicenseActivityTable" />
-      <Variable x:TypeArguments="s:String[]" Name="ar_JsonExtract">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="new string(){&quot;&quot;,&quot;&quot;}" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="s:String[]" Default="[new string(){&quot;&quot;,&quot;&quot;}]" Name="ar_JsonExtract" />
       <Variable x:TypeArguments="x:String" Name="st_UserLicenseActivityTable" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -133,6 +114,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="897,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Simple Logging Added&quot;]" />
     <Assign sap:VirtualizedContainerService.HintSize="897,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[st_GetLicensesNamedUserEndpoint]</OutArgument>
@@ -144,6 +126,13 @@
     <ui:OrchestratorHttpRequest JSONPayload="{x:Null}" ResponseHeaders="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Orchestrator HTTP Request Studio X named user licenses" sap:VirtualizedContainerService.HintSize="897,22" sap2010:WorkflowViewState.IdRef="OrchestratorHttpRequest_1" Method="GET" RelativeEndpoint="[st_GetLicensesNamedUserEndpoint]" Result="[st_GetLicensesNamedUserResposne]" StatusCode="[int_GetAutoDevLicStatCode]" />
     <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="897,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[js_UsersObject]" JsonString="[st_GetLicensesNamedUserResposne]" />
     <ui:DeserializeJsonArray DisplayName="Deserialize JSON Array" sap:VirtualizedContainerService.HintSize="897,59" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[jsar_StudioXUsersArray]" JsonString="[js_UsersObject(&quot;value&quot;).ToString]" />
+    <Sequence DisplayName="Sequence - Dead Sequence" sap:VirtualizedContainerService.HintSize="897,83" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Sequence>
     <If Condition="[jsar_StudioXUsersArray.Count &gt; 0]" DisplayName="If no licensed StudioX users" sap:VirtualizedContainerService.HintSize="897,1241" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="476,1083" sap2010:WorkflowViewState.IdRef="Sequence_5">
